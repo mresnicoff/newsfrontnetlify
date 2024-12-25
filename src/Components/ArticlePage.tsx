@@ -5,7 +5,7 @@ import { formatDate } from '../hooks/dateFormat';
 import Likes from './Likes';
 import axios from 'axios';
 import ShareLinks from './ShareLinks';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 interface Article {
   id: number;

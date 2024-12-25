@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes"
 import { ChakraProvider } from "@chakra-ui/react";
 import AuthContextProvider from "./auth/authContext";
+import { HelmetProvider } from 'react-helmet-async';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -17,10 +18,12 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <AuthContextProvider>
+      <HelmetProvider>  
   <ChakraProvider>
   <QueryClientProvider client={queryClient}>
   <RouterProvider router={router} />
   </QueryClientProvider>
   </ChakraProvider>
+  </HelmetProvider>
   </AuthContextProvider>
 );
