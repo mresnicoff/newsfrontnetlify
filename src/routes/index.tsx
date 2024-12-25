@@ -1,9 +1,8 @@
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createBrowserRouter, RouteObject, useSearchParams } from "react-router-dom";
 import App from "../App";
 import Form from "../Form";
 import MostrarNotas from "../MostrarNotas";
 import LayoutPublic from "../layout/LayOutPublic";
-import NoticiaDetalle from "../Components/NoticiaDetalle";
 import LoginForm from "../Components/LoginForm";
 import RegisterForm from "../Components/Registrarse";
 import Logout from "../Components/Logout";
@@ -14,14 +13,21 @@ import ResetPasswordForm from "../Components/ResetPassword";
 import Error404 from "../Components/Error404";
 import ArticlePage from "../Components/ArticlePage";
 
+function HomeRoute() {
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
+  return id ? <ArticlePage id={id} /> : <App />;
+}
 const routes: RouteObject[] = [
   {
     path: "/",
     element: <LayoutPublic />,
     children: [
       {
-        index: true,
-        element: <App />,
+        index: true,  
+        element: <HomeRoute/>
+        ,
       },
       {
         path: "notas",
@@ -54,10 +60,6 @@ const routes: RouteObject[] = [
       {
         path: "registrarse",
         element: <RegisterForm />,
-      },
-      {
-        path: "noticia/:id",
-        element: <ArticlePage />,
       },
       {
         path: "buscar",
