@@ -12,6 +12,7 @@ import SearchForm from "../Components/SearchForm";
 import ForgotPasswordForm from "../Components/ForgotPassword";
 import ResetPasswordForm from "../Components/ResetPassword";
 import Error404 from "../Components/Error404";
+import ArticlePage from "../Components/ArticlePage";
 
 const routes: RouteObject[] = [
   {
@@ -56,12 +57,13 @@ const routes: RouteObject[] = [
       },
       {
         path: "noticia/:id",
-        element: <NoticiaDetalle />,
+        element: <ArticlePage />,
       },
       {
         path: "buscar",
         element: <SearchForm />,
       },
+
       {
         path: "*",
         element: <Error404 rutaNoEncontrada={window.location.pathname}/>,

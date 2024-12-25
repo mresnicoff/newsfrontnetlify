@@ -35,11 +35,15 @@ const MostrarNotas: React.FC = () => {
   const [selectedNews, setSelectedNews] = useState<Article | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
+  const notaid = searchParams.get('notaid')
  // Aquí filtras tus notas según los parámetros obtenidos
 
   useEffect(() => {
 console.log(searchParams)
     fetchNews();
+    if (notaid) { // Si hay un notaid en la URL, abre el modal con ese ID
+      handleClick(Number(notaid));
+    }
   }, [searchParams]);
 
   const fetchNews = async () => {

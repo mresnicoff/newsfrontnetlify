@@ -4,6 +4,7 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, Modal
 import { formatDate } from '../hooks/dateFormat';
 import Likes from './Likes';
 import axios from 'axios';
+import ShareLinks from './ShareLinks';
 interface Article {
   key: number;
   id: number;
@@ -77,6 +78,7 @@ const NoticiaModal: React.FC<NoticiaModalProps> = ({ isOpen, onClose, selectedNe
                 <Box>
                   <Text fontSize="md" color="red">{formatDate(selectedNews?.date as string)}</Text>
                   <Text color="gray.600">{selectedNews?.autor.nombre}</Text>
+                  {selectedNews && <ShareLinks notaid={selectedNews.id} />} {/* Añadir aquí */}
                 </Box>
               </Flex>
               <Text 
@@ -87,6 +89,8 @@ const NoticiaModal: React.FC<NoticiaModalProps> = ({ isOpen, onClose, selectedNe
                 }}
               />
             </Box>
+
+
             <Box width="20%" p="4">
               <Box 
                 borderWidth="1px" 
