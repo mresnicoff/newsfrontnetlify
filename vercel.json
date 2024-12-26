@@ -1,13 +1,17 @@
-{
-  "builds": [],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/dist/$1"
+{"version": 2,
+"builds": [
+  { "src": "package.json", "use": "@vercel/static-build", "config": { "command": "yarn build" } }
+],
+"routes": [
+  {
+    "src": "/(.*)",
+    "headers": {
+      "Cache-Control": "public, max-age=0, must-revalidate"
     },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/index.html"
-    }
-  ]
+    "dest": "/$1"
+  }
+],
+"rewrites": [
+  { "source": "/(.*)", "destination": "/index.html" }
+]
 }
