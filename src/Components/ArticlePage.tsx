@@ -71,10 +71,10 @@ const ArticlePage = () => {
     <meta property="og:title" content="Nueva Noticia" />
     <meta property="og:image" content={article.image} />
     <meta property="og:description" content="Esta noticia es muy interesante" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Nueva noticia" />
-    <meta name="twitter:image" content={article.image} />
-    <meta name="twitter:description" content="Esta noticia es muy interesante" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Nueva noticia" />
+    <meta property="twitter:image" content={article.image} />
+    <meta property="twitter:description" content="Esta noticia es muy interesante" />
   </Helmet> 
   
 

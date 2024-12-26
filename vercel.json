@@ -2,15 +2,7 @@
 "builds": [
   { "src": "package.json", "use": "@vercel/static-build", "config": { "command": "yarn build" } }
 ],
-"routes": [
-  {
-    "src": "/(.*)",
-    "headers": {
-      "Cache-Control": "public, max-age=0, must-revalidate"
-    },
-    "dest": "/$1"
-  }
-],
+
 "rewrites": [
   { "source": "/(.*)", "destination": "/index.html" }
 ]
