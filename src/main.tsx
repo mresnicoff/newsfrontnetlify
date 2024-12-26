@@ -19,11 +19,11 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <AuthContextProvider>
       <HelmetProvider>  
-  <ChakraProvider>
-  <QueryClientProvider client={queryClient}>
-  <RouterProvider router={router} />
-  </QueryClientProvider>
-  </ChakraProvider>
-  </HelmetProvider>
+        <ChakraProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+          </QueryClientProvider>
+        </ChakraProvider>
+      </HelmetProvider>
   </AuthContextProvider>
 );

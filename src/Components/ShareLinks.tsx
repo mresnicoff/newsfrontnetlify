@@ -8,11 +8,11 @@ interface ShareLinksProps {
 }
 
 const ShareLinks: React.FC<ShareLinksProps> = ({ notaid }) => {
-  const { onCopy, hasCopied } = useClipboard(`${window.location.origin}/?notaid=${notaid}`);
+  const { onCopy, hasCopied } = useClipboard(`${window.location.origin}/articulo/${notaid}`);
 
   const shareOn = (network: SocialNetwork, url: string) => {
     const shareUrl: Record<SocialNetwork, string> = {
-      'twitter': `https://twitter.com/intent/tweet?text=Hola%20amigos!%20Les%20comparto%20esta%20nota%20que%20me%20pareció%20muy%20interesante&url=${encodeURIComponent(url)}`,
+      'twitter': `https://twitter.com/intent/tweet?text=Hola%20amigos!%20Les%20comparto%20esta%20nota%20que%20me%20pareció%20muy%20interesante&url=${window.location.origin}/articulo/${notaid}`,
       'facebook': `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
       'linkedin': `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, 
       'whatsapp': `whatsapp://send?text=Hola%20amigos!%20Les%20comparto%20esta%20nota%20que%20me%20pareció%20muy%20interesante%20${encodeURIComponent(url)}`

@@ -13,12 +13,7 @@ import ResetPasswordForm from "../Components/ResetPassword";
 import Error404 from "../Components/Error404";
 import ArticlePage from "../Components/ArticlePage";
 
-function HomeRoute() {
-  const [searchParams] = useSearchParams();
-  const id = searchParams.get("id");
 
-  return id ? <ArticlePage id={id} /> : <App />;
-}
 const routes: RouteObject[] = [
   {
     path: "/",
@@ -26,7 +21,7 @@ const routes: RouteObject[] = [
     children: [
       {
         index: true,  
-        element: <HomeRoute/>
+        element: <App/>
         ,
       },
       {
@@ -56,6 +51,10 @@ const routes: RouteObject[] = [
       {
         path: "reset-password",
         element: <ResetPasswordForm />,
+      },
+      {
+        path: "articulo/:id",
+        element: <ArticlePage />,
       },
       {
         path: "registrarse",

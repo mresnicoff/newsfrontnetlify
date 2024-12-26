@@ -57,7 +57,7 @@ export default function Form() {
         value={formData.content}
         onChange={handleChange('content')}
       />
-      <Button colorScheme="whatsapp" size="xs" mt={2} onClick={onSave}>
+      <Button colorScheme="purple"   mt={2} onClick={onSave}>
         {isPending ? "Saving..." : "Save"}
       </Button>
     </Box>

@@ -20,14 +20,13 @@ interface Article {
   image: string;
   likes: number;
 }
-interface ArticlePageProps {
-  id: string | null;
-}
-const ArticlePage: React.FC<ArticlePageProps> = ({ id }) => {
+
+const ArticlePage = () => {
   const [article, setArticle] = useState<Article | null>(null);
   const [likes, setLikes] = useState(0);
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_API_URL;
+  const { id } = useParams<{ id: string }>(); // Aquí obtenemos el id de los params de la URL
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -66,21 +65,23 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ id }) => {
 
   return (
     <>
-      <Helmet>
-{/*        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content={`@resnicoffmartin`} />
-        <meta name="twitter:title" content={article.title} />
-        <meta name="twitter:description" content={article.description} />
-        <meta name="twitter:image" content={article.image} /> */}
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@nytimesbits" />
-<meta name="twitter:creator" content="@nickbilton" />
-<meta property="og:url" content="http://bits.blogs.nytimes.com/2011/12/08/a-twitter-for-my-sister/" />
-<meta property="og:title" content="A Twitter for My Sister" />
-<meta property="og:description" content="In the early days, Twitter grew so quickly that it was almost impossible to add new features because engineers spent their time trying to keep the rocket ship from stalling." />
-<meta property="og:image" content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg" />
 
-      </Helmet>
+      <Helmet>
+    <title>Nueva noticia</title>
+    <meta property="og:title" content="Nueva Noticia" />
+    <meta property="og:image" content={article.image} />
+    <meta property="og:description" content="Esta noticia es muy interesante" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nueva noticia" />
+    <meta name="twitter:image" content={article.image} />
+    <meta name="twitter:description" content="Esta noticia es muy interesante" />
+  </Helmet> 
+  
+
+
+
+
+
       <Flex direction="column" bg="white" color="gray.800">
         <Box bg="purple.500" color="white" p={4}>
           <Text fontSize="xl">{article.title}</Text>
