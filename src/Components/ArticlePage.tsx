@@ -66,7 +66,7 @@ const ArticlePage = () => {
   return (
     <>
 
-      <Helmet>
+     {/* <Helmet>
       <meta charSet='utf-8'></meta>
     <title>Nueva noticia</title>
     <meta name="twitter:card" content="summary_large_image"></meta>
@@ -76,8 +76,8 @@ const ArticlePage = () => {
     <meta name="twitter:site" content="@infobae"></meta>
     <meta name="twitter:title" content="La devaluación del real ya afecta las exportaciones de autos argentinos a Brasil"></meta>
     <meta property="twitter:domain" content="infobae.com"></meta>
-    <meta property="twitter:url" content="https://www.infobae.com/economia/2024/12/26/la-devaluacion-del-real-ya-afecta-las-exportaciones-de-autos-argentinos-a-brasil/"></meta>
-  </Helmet> 
+    <meta property="twitter:url" content="https://www.infobae.com/economia/2024/12/26/la-devaluacion-del-real-ya-afecta-las-exportaciones-de-autos-argentinos-a-brasil/"></meta> 
+  </Helmet> */}
   
 
 
