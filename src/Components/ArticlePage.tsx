@@ -81,7 +81,7 @@ const ArticlePage = () => {
 
   return (
     <>
-      <Helmet>
+    {/*}  <Helmet>
         <meta charSet='utf-8' />
         <title>Nueva noticia</title>
         <meta name="twitter:card" content="summary_large_image" />
@@ -92,7 +92,7 @@ const ArticlePage = () => {
         <meta name="twitter:title" content={article.title} />
         <meta property="twitter:domain" content="https://www.lasnoticias-mu.vercel.app/" />
         <meta property="twitter:url" content={`https://www.lasnoticias-mu.vercel.app/articulo/${article.id}`} />
-      </Helmet> 
+      </Helmet> */}
 
       <Flex direction="column" bg="white" color="gray.800">
         <Box bg="purple.500" color="white" p={4}>
