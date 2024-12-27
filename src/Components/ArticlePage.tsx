@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Flex, Box, Text, Image, Button } from "@chakra-ui/react";
+import { Flex, Box, Text, Image, Button, useMediaQuery } from "@chakra-ui/react";
 import { formatDate } from '../hooks/dateFormat';
 import Likes from './Likes';
 import axios from 'axios';
@@ -20,13 +20,26 @@ interface Article {
   image: string;
   likes: number;
 }
+interface LikeProps {
+  id: number;
+  initialLikes: number;
+  onLikeToggle: (id: number, liked: boolean) => void;
+  fontSize?: string; // Puedes definir un tipo más específico si lo necesitas, como 'sm' | 'md' | 'lg'
+}
+
+interface ShareLinksProps {
+  notaid: number;
+  fontSize?: string;
+  buttonSize?: string;
+}
 
 const ArticlePage = () => {
   const [article, setArticle] = useState<Article | null>(null);
   const [likes, setLikes] = useState(0);
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_API_URL;
-  const { id } = useParams<{ id: string }>(); // Aquí obtenemos el id de los params de la URL
+  const { id } = useParams<{ id: string }>();
+  const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -36,7 +49,6 @@ const ArticlePage = () => {
         setLikes(response.data.article.likes);
       } catch (error) {
         console.error('Error fetching article:', error);
-        // Puedes redirigir a una página de error si la consulta falla
         navigate('/error', { replace: true });
       }
     };
@@ -63,66 +75,65 @@ const ArticlePage = () => {
     return <div>Loading...</div>;
   }
 
+  // Ajustes para pantallas pequeñas
+  const fontSize = isSmallScreen ? "lg" : "md"; // Aumenta el tamaño de la fuente en pantallas pequeñas
+  const buttonSize = isSmallScreen ? "lg" : "md"; // Aumenta el tamaño de los botones en pantallas pequeñas
+
   return (
     <>
-
       <Helmet>
-      <meta charSet='utf-8'></meta>
-    <title>Nueva noticia</title>
-    <meta name="twitter:card" content="summary_large_image"></meta>
-    <meta name="twitter:creator" content="@resnicoffmartin"></meta>
-    <meta name="twitter:description" content={article.description}></meta>
-    <meta name="twitter:image"   content={article.image}></meta>
-    <meta name="twitter:site" content="@resnicoffmartin"></meta>
-    <meta name="twitter:title" content={article.title}></meta>
-    <meta property="twitter:domain" content="https://www.lasnoticias-mu.vercel.app/"></meta>
-    <meta property="twitter:url" content={`https://www.lasnoticias-mu.vercel.app/articulo/${article.id}`}></meta> 
-  </Helmet> 
-  
-
-
-
-
+        <meta charSet='utf-8' />
+        <title>Nueva noticia</title>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@resnicoffmartin" />
+        <meta name="twitter:description" content={article.description} />
+        <meta name="twitter:image" content={article.image} />
+        <meta name="twitter:site" content="@resnicoffmartin" />
+        <meta name="twitter:title" content={article.title} />
+        <meta property="twitter:domain" content="https://www.lasnoticias-mu.vercel.app/" />
+        <meta property="twitter:url" content={`https://www.lasnoticias-mu.vercel.app/articulo/${article.id}`} />
+      </Helmet> 
 
       <Flex direction="column" bg="white" color="gray.800">
         <Box bg="purple.500" color="white" p={4}>
-          <Text fontSize="xl">{article.title}</Text>
+          <Text fontSize={isSmallScreen ? "2xl" : "xl"}>{article.title}</Text>
         </Box>
-        <Flex p={4} alignItems="center">
+        <Flex p={4} alignItems="center" direction={isSmallScreen ? "column" : "row"}>
           {article.autor.avatar && (
             <Image 
               src={article.autor.avatar} 
               alt={article.autor.nombre + "'s avatar"} 
-              boxSize="50px" 
+              boxSize={isSmallScreen ? "75px" : "50px"} 
               borderRadius="full" 
-              mr={2} 
+              mb={isSmallScreen ? 2 : 0}
             />
           )}
           <Box>
-            <Text fontSize="md" color="red">{formatDate(article.date)}</Text>
-            <Text color="gray.600">{article.autor.nombre}</Text>
-            <ShareLinks notaid={article.id} />
+            <Text fontSize={fontSize} color="red">{formatDate(article.date)}</Text>
+            <Text color="gray.600" fontSize={fontSize}>{article.autor.nombre}</Text>
+            <ShareLinks notaid={article.id} fontSize={fontSize} buttonSize={buttonSize} />
           </Box>
         </Flex>
         <Box p={4}>
           <Text 
             dangerouslySetInnerHTML={{ __html: article.description }} 
             sx={{
-              'p': { color: "gray.700" },
+              'p': { color: "gray.700", fontSize: fontSize },
               'a': { color: "purple.600" }
             }}
           />
         </Box>
-        <Flex justify="space-between" p={4}>
-          <Likes id={article.id} initialLikes={likes} onLikeToggle={updateLikes} />
+        <Flex justify="space-between" p={4} direction={isSmallScreen ? "column" : "row"}>
+        <Likes id={article.id} initialLikes={likes} onLikeToggle={updateLikes} fontSize={fontSize} />
           <Button 
             colorScheme="purple" 
+            size={buttonSize}
             onClick={() => navigate("/")}
           >
             Volver
           </Button>
         </Flex>
-        <Box width="20%" p="4">
+        <Box width={isSmallScreen ? "100%" : "20%"} p="4">
           <Box 
             borderWidth="1px" 
             borderColor="purple.500" 
@@ -131,7 +142,7 @@ const ArticlePage = () => {
             boxShadow="md" 
             bg="white"
           >
-            <Text color="purple.800">Google Ads</Text>
+            <Text color="purple.800" fontSize={fontSize}>Google Ads</Text>
           </Box>
         </Box>
       </Flex>

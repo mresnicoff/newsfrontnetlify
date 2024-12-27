@@ -1,15 +1,15 @@
-// Likes.tsx
 import React, { useState, useEffect } from 'react';
 import { IconButton, Text, Flex } from "@chakra-ui/react";
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 
 interface LikeProps {
-  id: number; 
+  id: number;
   initialLikes: number;
-  onLikeToggle: (id: number, liked: boolean) => void; 
+  onLikeToggle: (id: number, liked: boolean) => void;
+  fontSize?: string;
 }
 
-const Likes: React.FC<LikeProps> = ({ id, initialLikes, onLikeToggle }) => {
+const Likes: React.FC<LikeProps> = ({ id, initialLikes, onLikeToggle, fontSize = 'md' }) => {
   const [liked, setLiked] = useState<boolean>(() => {
     const localStorageLikes = localStorage.getItem(`like-${id}`);
     return localStorageLikes === 'true';
@@ -31,7 +31,7 @@ const Likes: React.FC<LikeProps> = ({ id, initialLikes, onLikeToggle }) => {
         onClick={toggleLike}
         icon={liked ? <AiFillLike color="red" /> : <AiOutlineLike />}
         variant="ghost"
-        size="sm" 
+        size={fontSize}
       />
       <Text ml={1}>{initialLikes}</Text> 
     </Flex>

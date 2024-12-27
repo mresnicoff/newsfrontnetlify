@@ -5,9 +5,11 @@ type SocialNetwork = 'twitter' | 'facebook' | 'linkedin' | 'whatsapp';
 
 interface ShareLinksProps {
   notaid: number;
+  fontSize?: string;
+  buttonSize?: string;
 }
 
-const ShareLinks: React.FC<ShareLinksProps> = ({ notaid }) => {
+const ShareLinks: React.FC<ShareLinksProps> = ({ notaid, fontSize = 'md', buttonSize = 'md' }) => {
   const { onCopy, hasCopied } = useClipboard(`${window.location.origin}/articulo/${notaid}`);
 
   const shareOn = (network: SocialNetwork, url: string) => {
@@ -24,29 +26,39 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ notaid }) => {
   return (
     <Flex mt={4} justifyContent="center">
       <IconButton 
+        size={buttonSize}
+        fontSize={fontSize}
         aria-label="Share on Twitter" 
         icon={<FaTwitter />} 
         onClick={() => shareOn('twitter', `${window.location.origin}/?notaid=${notaid}`)} 
         mr={2}
       />
       <IconButton 
+        size={buttonSize}
+        fontSize={fontSize}
         aria-label="Share on Facebook" 
         icon={<FaFacebook />} 
         onClick={() => shareOn('facebook', `${window.location.origin}/?notaid=${notaid}`)} 
         mr={2}
       />
       <IconButton 
+        size={buttonSize}
+        fontSize={fontSize}
         aria-label="Share on LinkedIn" 
         icon={<FaLinkedin />} 
         onClick={() => shareOn('linkedin', `${window.location.origin}/?notaid=${notaid}`)} 
         mr={2}
       />
       <IconButton 
+        size={buttonSize}
+        fontSize={fontSize}
         aria-label="Share on WhatsApp" 
         icon={<FaWhatsapp />} 
         onClick={() => shareOn('whatsapp', `${window.location.origin}/?notaid=${notaid}`)} 
       />
-      <IconButton 
+      <IconButton
+        size={buttonSize}
+        fontSize={fontSize}
         aria-label="Copy Link" 
         icon={hasCopied ? <span>✓</span> : <span>🔗</span>} // Convertimos las cadenas en elementos React
         onClick={onCopy} 
