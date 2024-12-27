@@ -76,8 +76,8 @@ const ArticlePage = () => {
   }
 
   // Ajustes para pantallas pequeñas
-  const fontSize = isSmallScreen ? "lg" : "md"; // Aumenta el tamaño de la fuente en pantallas pequeñas
-  const buttonSize = isSmallScreen ? "lg" : "md"; // Aumenta el tamaño de los botones en pantallas pequeñas
+  const fontSize = isSmallScreen ? "2x1" : "md"; // Aumenta el tamaño de la fuente en pantallas pequeñas
+  const buttonSize = isSmallScreen ? "2x1" : "md"; // Aumenta el tamaño de los botones en pantallas pequeñas
 
   return (
     <>
