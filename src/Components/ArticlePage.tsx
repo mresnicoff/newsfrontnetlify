@@ -66,18 +66,18 @@ const ArticlePage = () => {
   return (
     <>
 
-     {/* <Helmet>
+      <Helmet>
       <meta charSet='utf-8'></meta>
     <title>Nueva noticia</title>
     <meta name="twitter:card" content="summary_large_image"></meta>
-    <meta name="twitter:creator" content="@infobae"></meta>
-    <meta name="twitter:description" content="En los últimos dos meses, la caída es generalizada, aunque las pick-up se defienden mejor que los autos y SUV, admiten en la industria"></meta>
-    <meta name="twitter:image"   content="https://www.infobae.com/resizer/v2/4IUGBZS5RNAALFDWSOVXCTWGQQ.jpg?auth=445248b7eb2c6252a16536b0810ddb4a1ccb30b374bd6bfe795fc258bc6391df&amp;smart=true&amp;width=1024&amp;height=512&amp;quality=85"></meta>
-    <meta name="twitter:site" content="@infobae"></meta>
-    <meta name="twitter:title" content="La devaluación del real ya afecta las exportaciones de autos argentinos a Brasil"></meta>
-    <meta property="twitter:domain" content="infobae.com"></meta>
-    <meta property="twitter:url" content="https://www.infobae.com/economia/2024/12/26/la-devaluacion-del-real-ya-afecta-las-exportaciones-de-autos-argentinos-a-brasil/"></meta> 
-  </Helmet> */}
+    <meta name="twitter:creator" content="@resnicoffmartin"></meta>
+    <meta name="twitter:description" content={article.description}></meta>
+    <meta name="twitter:image"   content={article.image}></meta>
+    <meta name="twitter:site" content="@resnicoffmartin"></meta>
+    <meta name="twitter:title" content={article.title}></meta>
+    <meta property="twitter:domain" content="https://www.lasnoticias-mu.vercel.app/"></meta>
+    <meta property="twitter:url" content={`https://www.lasnoticias-mu.vercel.app/articulo/${article.id}`}></meta> 
+  </Helmet> 
   
 
 
