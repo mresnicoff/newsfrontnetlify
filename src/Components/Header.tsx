@@ -48,7 +48,7 @@ const Header: React.FC = () => {
   const btnRef = useRef<HTMLButtonElement>(null);
 
   // Determina si mostrar el menú completo o el menú hamburguesa
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = useBreakpointValue({ base: true, sm: true, md: false });
 
   const isUserLogged = Object.keys(loggedUser).length > 0;
 
