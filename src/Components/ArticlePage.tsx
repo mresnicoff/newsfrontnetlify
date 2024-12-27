@@ -142,7 +142,7 @@ const ArticlePage = () => {
             boxShadow="md" 
             bg="white"
           >
-            <Text color="purple.800" fontSize={fontSize}>Google Ads</Text>
+            <Text color="purple.800" fontSize={fontSize}>Espacio para anuncios</Text>
           </Box>
         </Box>
       </Flex>

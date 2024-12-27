@@ -112,7 +112,7 @@ console.log(searchParams)
         <Box position="fixed"
          right="0" top="200"
           bottom="0" borderWidth="1px" borderRadius="lg" p="4" boxShadow="md" bg="white">
-          <Text>Google Ads</Text>
+          <Text> Espacio para anuncios</Text>
         </Box>
       </Box>
       

@@ -100,7 +100,7 @@ const NoticiaModal: React.FC<NoticiaModalProps> = ({ isOpen, onClose, selectedNe
                 boxShadow="md" 
                 bg="white"
               >
-                <Text color="purple.800">Google Ads</Text>
+                <Text color="purple.800"> Espacio para anuncios</Text>
               </Box>
             </Box>
           </Flex>
