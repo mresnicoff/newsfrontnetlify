@@ -86,7 +86,7 @@ const ArticlePage = () => {
         <title>Nueva noticia</title>
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@resnicoffmartin" />
-        <meta name="twitter:description" content={article.description} />
+        <meta name="twitter:description" content="Esta nota es muy interesante" />
         <meta name="twitter:image" content={article.image} />
         <meta name="twitter:site" content="@resnicoffmartin" />
         <meta name="twitter:title" content={article.title} />
