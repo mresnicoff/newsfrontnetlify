@@ -81,7 +81,7 @@ console.log(searchParams)
 
   return (
     <Flex wrap="wrap" justify="space-between">
-      <Box width="80%" bg="purple">
+      <Box width="95%" bg="purple">
         <InfiniteScroll
           dataLength={newsItems.length}
           next={fetchNews}
@@ -108,13 +108,7 @@ console.log(searchParams)
           </Flex>
         </InfiniteScroll>
       </Box>
-      <Box width="20%" p="4">
-        <Box position="fixed"
-         right="0" top="200"
-          bottom="0" borderWidth="1px" borderRadius="lg" p="4" boxShadow="md" bg="white">
-          <Text> Espacio para anuncios</Text>
-        </Box>
-      </Box>
+
       
       {/* Aquí incluimos el componente modal */}
       <NoticiaModal 

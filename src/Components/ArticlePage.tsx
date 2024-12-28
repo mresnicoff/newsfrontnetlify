@@ -133,18 +133,7 @@ const ArticlePage = () => {
             Volver
           </Button>
         </Flex>
-        <Box width={isSmallScreen ? "100%" : "20%"} p="4">
-          <Box 
-            borderWidth="1px" 
-            borderColor="purple.500" 
-            borderRadius="lg" 
-            p="4" 
-            boxShadow="md" 
-            bg="white"
-          >
-            <Text color="purple.800" fontSize={fontSize}>Espacio para anuncios</Text>
-          </Box>
-        </Box>
+      
       </Flex>
     </>
   );

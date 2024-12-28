@@ -64,7 +64,7 @@ const NoticiaModal: React.FC<NoticiaModalProps> = ({ isOpen, onClose, selectedNe
         />
         <ModalBody>
           <Flex>
-            <Box width="80%" overflowY="auto" maxHeight="60vh">
+            <Box width="95%" overflowY="auto" maxHeight="60vh">
               <Flex alignItems="center" mb={2}>
                 {selectedNews?.autor.avatar && (
                   <Image 
@@ -91,18 +91,8 @@ const NoticiaModal: React.FC<NoticiaModalProps> = ({ isOpen, onClose, selectedNe
             </Box>
 
 
-            <Box width="20%" p="4">
-              <Box 
-                borderWidth="1px" 
-                borderColor="purple.500" 
-                borderRadius="lg" 
-                p="4" 
-                boxShadow="md" 
-                bg="white"
-              >
-                <Text color="purple.800"> Espacio para anuncios</Text>
-              </Box>
-            </Box>
+
+ 
           </Flex>
         </ModalBody>
         <ModalFooter justifyContent="space-between">
