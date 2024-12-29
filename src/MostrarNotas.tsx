@@ -6,11 +6,13 @@ import axios from 'axios';
 import Noticia from './Components/Noticia';
 import { Flex, Box, Text, useBreakpointValue } from "@chakra-ui/react";
 import NoticiaModal from './Components/NoticiaModal';  
-
+import NewsCategories from './Components/NewsCategories';
+import { useAuthContext } from './auth/authContext'; // Asegúrate de que la ruta sea correcta
 interface Article {
   key: number;
   id: number;
   date: string;
+  categoria: string;
   autor:{
     nombre: string;
     avatar: string;}
@@ -25,10 +27,7 @@ interface Article {
 
 const MostrarNotas: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const country = searchParams.get('country');
-  const category = searchParams.get('category');
-  const autor = searchParams.get('autor');
-  const keywords = searchParams.get('keywords');
+  const { filtros } = useAuthContext(); 
   const [newsItems, setNewsItems] = useState<Article[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -36,37 +35,45 @@ const MostrarNotas: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
   const notaid = searchParams.get('notaid')
+  const { keywords, categoria, pais, autor } = filtros;
  // Aquí filtras tus notas según los parámetros obtenidos
 
-  useEffect(() => {
-console.log(searchParams)
-    fetchNews();
-    if (notaid) { // Si hay un notaid en la URL, abre el modal con ese ID
-      handleClick(Number(notaid));
-    }
-  }, [searchParams]);
-
-  const fetchNews = async () => {
-    try {
-      const response = await axios.get<{ articles: Article[] }>(apiUrl+`news?page=${page}`);
-      const data = response.data;
-          const filteredNotes = data.articles.filter(note => {
-        let matches = true;
-      //  if (country && note.country !== country) matches = false;
-      //  if (category && note.category !== category) matches = false;
-            if (keywords && !note.description.includes(keywords)) matches = false;
-        return matches;
-      });
+ const fetchNews = async () => {
+  console.log("Entró a fetchnews", page)
+  try {
+    const response = await axios.get<{ articles: Article[] }>(apiUrl+`news?page=${page}`);
+    const data =  response.data;
+        const filteredNotes = data.articles.filter(note => {
+      let matches = true;
+   
+    if (autor && note.autor.nombre !== autor) matches = false;
+  console.log(autor,note.autor.nombre, matches)
+       if (categoria!=="recientes" && note.categoria !== categoria ) matches = false;
+       console.log("Categoria", categoria, "Nota",note.categoria, matches)
+          if (keywords && !note.description.includes(keywords)) matches = false;
+      return matches;
+    });
       setNewsItems((prevNewsItems) => [...prevNewsItems, ...filteredNotes]);
-      setPage(page + 1);
-      if (data.articles.length === 0) {
-        setHasMore(false);
-      }
-    } catch (error) {
-      console.error("Error fetching news:", error);
+    setPage(page + 1);
+    if (data.articles.length === 0) {
+      setHasMore(false);
     }
-  };
+  } catch (error) {
+    console.error("Error fetching news:", error);
+  }
+};
+useEffect(() => {
+  setNewsItems([])
+   console.log("cambió filtros")
+  fetchNews();
+ 
+  if (notaid) { // Si hay un notaid en la URL, abre el modal con ese ID
+    handleClick(Number(notaid));
+  }
+}, [searchParams, filtros]);
 
+ 
+ 
   const handleClick = async (id: number) => {
     try {
       const response = await axios.get<{ article: Article }>(apiUrl+`news/${id}`);
@@ -80,6 +87,12 @@ console.log(searchParams)
   const cardWidth = useBreakpointValue({ base: "100%", md: "30%" });
 
   return (
+    <Flex direction="column" align="center">
+      {/* Menú de categorías */}
+      <Box width="100%" mb={4}>
+        <NewsCategories setPage={setPage}/>
+      </Box>
+
     <Flex wrap="wrap" justify="space-between">
       <Box width="95%" bg="purple">
         <InfiniteScroll
@@ -116,6 +129,7 @@ console.log(searchParams)
         onClose={() => setIsModalOpen(false)} 
         selectedNews={(selectedNews as Article)}
       />
+    </Flex>
     </Flex>
   );
 };

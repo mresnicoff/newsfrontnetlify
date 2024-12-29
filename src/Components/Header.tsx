@@ -24,18 +24,15 @@ import { Link as ReactRouterLink, useSearchParams } from "react-router-dom";
 
 const Header: React.FC = () => {
   let navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { loggedUser, filtersActive, setFiltersActive } = useAuthContext();
+
+  const { loggedUser, filtersActive, setFiltersActive, setFiltrosHandler, filtros } = useAuthContext();
   
   const clearFilters = () => {
+  
     setFiltersActive(); // Desactiva el estado de filtros
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.delete('country');
-    newSearchParams.delete('category');
-    newSearchParams.delete('author');
-    newSearchParams.delete('keywords');
-    setSearchParams(newSearchParams); // Esto limpia todos los parámetros de búsqueda en la URL actual
-    navigate("/notas");
+      setFiltrosHandler({ ...filtros, categoria: "recientes", keywords:null, pais:null, autor:null });
+      navigate("/notas")
+
   };
 
   // Colores basados en el modo claro/oscuro

@@ -18,12 +18,12 @@ interface Option {
 }
 
 const SearchForm: React.FC = () => {
-    const { setFiltersActive } = useAuthContext();
+    const { setFiltersActive, setFiltrosHandler } = useAuthContext();
     const navigate = useNavigate();
     const [searchCriteria, setSearchCriteria] = useState({
-        country: '',
-        category: '',
-        author: '',
+        pais: '',
+        categoria: 'recientes',
+        autor: '',
         keywords: ''
       });
       const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -41,8 +41,10 @@ const SearchForm: React.FC = () => {
     e.preventDefault();
     // Construye la URL con los parámetros de búsqueda
     const queryParams = new URLSearchParams(searchCriteria);
+    setFiltrosHandler(searchCriteria)
+    console.log(searchCriteria)
     setFiltersActive();
-    navigate(`/?${queryParams.toString()}`);
+    navigate("/");
   };
 
   // Datos hardcoded para países, categorías y autores
@@ -53,17 +55,17 @@ const SearchForm: React.FC = () => {
     // Añade más países según necesites
   ];
 
-  const categories: Option[] = [
-    { value: "politica", label: "Política" },
-    { value: "deportes", label: "Deportes" },
-    { value: "tecnologia", label: "Tecnología" },
+  const categorias: Option[] = [
+    { value: "politica", label: "plotica" },
+    { value: "recientes", label: "recientes" },
+    { value: "mundo", label: "mundo" },
     // Añade más categorías según necesites
   ];
 
-  const authors: Option[] = [
-    { value: "autor1", label: "Autor 1" },
-    { value: "autor2", label: "Autor 2" },
-    { value: "autor3", label: "Autor 3" },
+  const autores: Option[] = [
+    { value: "Martin Resnicoff", label: "Martin Resnicoff" },
+    { value: "Otro", label: "Otro" },
+    { value: "Tommy", label: "Tommy" },
     // Añade más autores según necesites
   ];
 
@@ -90,8 +92,8 @@ const SearchForm: React.FC = () => {
 
           <FormControl>
             <FormLabel> Categoría </FormLabel>
-            <Select name="category"placeholder="Selecciona una categoría"  onChange={handleChange}>
-              {categories.map(category => (
+            <Select name="categoria"placeholder="Selecciona una categoría"  onChange={handleChange}>
+              {categorias.map(category => (
                 <option key={category.value} value={category.value}>{category.label}</option>
               ))}
             </Select>
@@ -100,7 +102,7 @@ const SearchForm: React.FC = () => {
           <FormControl>
             <FormLabel> Autor </FormLabel>
             <Select name="autor" placeholder="Selecciona un autor"  onChange={handleChange}>
-              {authors.map(autor => (
+              {autores.map(autor => (
                 <option key={autor.value} value={autor.value}>{autor.label}</option>
               ))}
             </Select>
