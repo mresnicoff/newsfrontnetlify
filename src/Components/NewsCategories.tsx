@@ -35,6 +35,7 @@ const NewsCategories: React.FC<NewsCategoriesProps> = ({setPage}) => {
     { name: 'Últimas Noticias', value: 'recientes' },
     { name: 'Política', value: 'politica' },
     { name: 'Mundo', value: 'mundo' },
+    { name: 'Inversiones', value: 'inversiones' },
   ];
 
   return (
